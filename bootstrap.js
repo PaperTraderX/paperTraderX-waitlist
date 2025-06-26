@@ -4,6 +4,7 @@ import express from "express";
 import logger from "./utils/logger.js";
 import { connect } from "./config/db.js";
 import userRoute from "./routes/waitlistRoute.js";
+import internalRoute from "./routes/internalRoute.js";
 import { apiRateLimiter } from "./utils/rateLimiter.js";
 
 function initMiddlewares(app) {
@@ -14,6 +15,7 @@ function initMiddlewares(app) {
 }
 
 function initRoutes(app) {
+  app.use("/internal", internalRoute);
   app.use("/api/waitlist-user", userRoute);
 }
 
