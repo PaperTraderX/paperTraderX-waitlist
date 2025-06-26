@@ -1,6 +1,7 @@
 import validator from "validator";
 import { v4 as uuidv4 } from "uuid";
 import WaitListUser from "../models/waitlist-users.js";
+import { emailQueue } from "../lib/queue.js";
 
 export const addToWaitlist = async (req, res) => {
   const { userName, email, source, referralId: referrerId } = req.body;
@@ -20,15 +21,21 @@ export const addToWaitlist = async (req, res) => {
     }
 
     if (referrerId) {
-  const referrerUpdate = await WaitListUser.findOneAndUpdate(
-    { referralId: referrerId },
-    { $inc: { referralCount: 1 } }
-  );
+      const referrer = await WaitListUser.findOneAndUpdate(
+        { referralId: referrerId },
+        { $inc: { referralCount: 1 } },
+        { new: true }
+      );
 
-  if (!referrerUpdate) {
-    console.warn(`Referrer not found for referralId: ${referrerId}`);
-  }
-}
+      if (referrer) {
+        await emailQueue.add("referralEmail", {
+          to: referrer.email,
+          type: "referral",
+          userName: referrer.userName,
+          referralCount: referrer.referralCount,
+        });
+      }
+    }
 
     const newReferralId = uuidv4();
 
@@ -37,6 +44,11 @@ export const addToWaitlist = async (req, res) => {
       email,
       source,
       referralId: newReferralId,
+    });
+    await emailQueue.add("welcomeEmail", {
+      to: newUser.email,
+      type: "welcome",
+      userName: newUser.userName,
     });
 
     const count = await WaitListUser.countDocuments();

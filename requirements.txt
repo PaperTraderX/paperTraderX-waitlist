@@ -1,0 +1,11 @@
+// commands to run for locally running the server
+// 1. docker run -p 6379:6379 redis
+// 2. npm run worker
+// 3. npm run dev
+
+// to-do
+// fix: email logs not getting saved in db
+// depl: deploy backend application to aws
+// depl: deploy database to mongodb atlas
+// depl: deploy redis to aws
+// depl: deploy redis to aws elasticache
