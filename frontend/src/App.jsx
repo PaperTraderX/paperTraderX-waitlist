@@ -1,3 +1,4 @@
+// This is your main React component, where you’ll write the waitlist form UI, handle user input, and connect to your backend.
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { useState } from "react";
