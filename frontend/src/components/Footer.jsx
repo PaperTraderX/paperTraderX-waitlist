@@ -8,7 +8,6 @@ const Footer = () => {
         </p>
 
         <div className="flex justify-center gap-6 mt-6">
-          {/* X */}
           <a
             href="https://x.com"
             target="_blank"
