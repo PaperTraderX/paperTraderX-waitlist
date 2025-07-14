@@ -1,11 +1,12 @@
-// App.tsx
 import { toast, Toaster } from "react-hot-toast";
 import { ArrowRight } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import Button from "./components/ui/Button";
 import Input from "./components/ui/Input";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Confetti from "react-confetti";
+import { useWindowSize } from "@react-hook/window-size";
 import {
   Shield,
   BarChart3,
@@ -15,7 +16,6 @@ import {
   Bot,
   CalendarDays,
   BookOpenCheck,
-  Lock,
   DollarSign,
   LineChart,
 } from "lucide-react";
@@ -23,6 +23,8 @@ import {
 const App = () => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [width, height] = useWindowSize();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,11 +50,20 @@ const App = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
+      // const res = { ok: true };
 
       if (res.ok) {
         setIsSubmitted(true);
-        toast.success("✅ You're on the waitlist!");
+        setShowConfetti(true);
+        toast.success(
+          <div>
+            <strong>Welcome to PaperTraderX! 🎉</strong>
+            <p>We'll notify you as soon as PaperTraderX launches.</p>
+          </div>,
+          { icon: "" }
+        );
         setEmail("");
+        setTimeout(() => setShowConfetti(false), 5000);
       } else {
         toast.custom((t) => (
           <div
@@ -66,7 +77,6 @@ const App = () => {
             </span>
           </div>
         ));
-        return;
       }
     } catch (error) {
       toast.error("Something went wrong. Please try later.");
@@ -208,19 +218,20 @@ const App = () => {
   return (
     <>
       <Header />
+      {showConfetti && <Confetti width={width} height={height} />}
       <Toaster
         position="bottom-right"
         toastOptions={{
           duration: 4000,
           style: {
-            background: "#EF4444", // Tailwind's red-500
-            color: "#fff",
+            background: "#EF4444",
+            color: "black",
             padding: "16px",
             borderRadius: "8px",
             fontSize: "14px",
           },
           success: {
-            style: { background: "#16A34A" }, // green-600 for success
+            style: { background: "white" },
           },
         }}
       />
@@ -251,30 +262,31 @@ const App = () => {
               virtual money.
             </p>
 
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6"
-            >
-              <Input
-                type="email"
-                placeholder="Enter your email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full sm:w-[300px] font-bold h-12 text-base bg-white/20 border-white/30 text-white placeholder:text-white/100 focus:bg-white/30"
-              />
-              <Button
-                type="submit"
-                className="h-12 px-8 bg-gradient-to-r from-cyan-500 to-sky-900 text-white font-bold transition-all duration-300 hover:scale-105 flex items-center gap-2"
+            {!isSubmitted ? (
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6"
               >
-                Join Waitlist
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </form>
-
-            {isSubmitted && (
-              <p className="text-green-600 font-medium mt-4">
-                🎉 You're on the waitlist! We'll notify you when we launch.
-              </p>
+                <Input
+                  type="email"
+                  placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full sm:w-[300px] font-bold h-12 text-base bg-white/20 border-white/30 text-white placeholder:text-white/100 focus:bg-white/30"
+                />
+                <Button
+                  type="submit"
+                  className="h-12 px-8 bg-gradient-to-r from-cyan-500 to-sky-900 text-white font-bold transition-all duration-300 hover:scale-105 flex items-center gap-2"
+                >
+                  Join Waitlist
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </form>
+            ) : (
+              <div className="bg-white text-green-500 rounded-lg py-4 px-6 font-semibold text-lg mt-6 shadow">
+                You're in! 🎉 <br />
+                We'll notify you as soon as PaperTraderX launches.
+              </div>
             )}
 
             <p className="text-sm text-white mt-4">
@@ -302,7 +314,10 @@ const App = () => {
         </section>
 
         {/* Why Choose Section */}
-        <section className="py-20 bg-gradient-to-r from-cyan-500 to-sky-900 text-white text-center px-4">
+        <section
+          id="features"
+          className="py-20 bg-gradient-to-r from-cyan-500 to-sky-900 text-white text-center px-4"
+        >
           <div className="max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
               Why Choose PaperTraderX?
@@ -418,7 +433,10 @@ const App = () => {
       </section>
 
       {/* FAQ Section */}
-      <section id="faqs" className="bg-gradient-to-r from-cyan-500 to-sky-900 text-gray-800 py-16 px-4 text-center">
+      <section
+        id="faqs"
+        className="bg-gradient-to-r from-cyan-500 to-sky-900 text-gray-800 py-16 px-4 text-center"
+      >
         <div className="max-w-6xl mx-auto">
           <h2 className="text-white text-4xl md:text-5xl font-bold mb-6">
             Frequently Asked Questions
@@ -479,25 +497,32 @@ const App = () => {
             <p>No risk, all reward.</p>
           </p>
           <div className="max-w-md mx-auto">
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col sm:flex-row gap-3"
-            >
-              <Input
-                type="email"
-                placeholder="Your email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full sm:w-[300px] font-bold h-12 text-base bg-white/20 border-white/30 text-white placeholder:text-white/100 focus:bg-white/30"
-              />
-              <Button
-                type="submit"
-                className="h-12 px-8 bg-gradient-to-r from-cyan-500 to-sky-900 text-white font-bold transition-all duration-300 hover:scale-105 flex items-center gap-2"
+            {!isSubmitted ? (
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col sm:flex-row gap-3"
               >
-                Get Early Access
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </form>
+                <Input
+                  type="email"
+                  placeholder="Your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full sm:w-[300px] font-bold h-12 text-base bg-white/20 border-white/30 text-white placeholder:text-white/100 focus:bg-white/30"
+                />
+                <Button
+                  type="submit"
+                  className="h-12 px-8 bg-gradient-to-r from-cyan-500 to-sky-900 text-white font-bold transition-all duration-300 hover:scale-105 flex items-center gap-2"
+                >
+                  Get Early Access
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </form>
+            ) : (
+              <div className="bg-white text-green-500 rounded-lg py-4 px-6 font-semibold text-lg shadow">
+                You're in! 🎉 <br />
+                We'll notify you as soon as PaperTraderX launches.
+              </div>
+            )}
           </div>
         </div>
       </section>
