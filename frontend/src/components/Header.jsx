@@ -1,6 +1,7 @@
 function Header() {
   const navLinks = [
     { label: "Home", href: "#hero" },
+    { label: "Features", href: "#features" },
     { label: "Socials", href: "#socials" },
     { label: "FAQ's", href: "#faqs" },
     { label: "Career", href: "#career" },
