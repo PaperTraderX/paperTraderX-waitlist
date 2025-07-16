@@ -1,0 +1,7 @@
+5. deployment of both frontend and backend
+
+1. show referral count
+2. if user already exist then show, email id already registered, try with different one
+3. integrate api to add email id in db and send user a mail
+4. write mail content
+6. test if everything is working fine or not

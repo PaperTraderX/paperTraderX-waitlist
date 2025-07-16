@@ -9,7 +9,7 @@ const Footer = () => {
 
         <div className="flex justify-center gap-6 mt-6">
           <a
-            href="https://x.com"
+            href="https://x.com/PaperX76660"
             target="_blank"
             rel="noopener noreferrer"
             className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-800 hover:bg-black transition"
@@ -22,7 +22,7 @@ const Footer = () => {
           </a>
 
           {/* YouTube */}
-          <a
+          {/* <a
             href="https://youtube.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -33,7 +33,7 @@ const Footer = () => {
               alt="YouTube"
               className="w-5 h-5 hover:scale-110 transition"
             />
-          </a>
+          </a> */}
 
           {/* Instagram */}
           <a
@@ -51,7 +51,7 @@ const Footer = () => {
 
           {/* LinkedIn */}
           <a
-            href="https://linkedin.com"
+            href="https://linkedin.com/company/papertraderx"
             target="_blank"
             rel="noopener noreferrer"
             className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-800 hover:bg-[#0A66C2] transition"
