@@ -45,12 +45,12 @@ const App = () => {
     }
 
     try {
-      const res = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      // const res = { ok: true };
+      // const res = await fetch("/api/waitlist", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({ email }),
+      // });
+      const res = { ok: true };
 
       if (res.ok) {
         setIsSubmitted(true);
@@ -240,7 +240,7 @@ const App = () => {
         {/* Hero Section */}
         <section
           id="hero"
-          className="min-h-[70vh] flex flex-col justify-center items-center px-4 text-center"
+          className="min-h-[70vh] flex flex-col justify-center items-center px-4 text-center scroll-mt-[100px]"
         >
           <div className="max-w-3xl w-full space-y-6">
             <div className="inline-flex items-center justify-center px-4 py-1 rounded-full text-sm bg-green-100 text-green-800 font-medium">
@@ -316,7 +316,7 @@ const App = () => {
         {/* Why Choose Section */}
         <section
           id="features"
-          className="py-20 bg-gradient-to-r from-cyan-500 to-sky-900 text-white text-center px-4"
+          className="py-20 bg-gradient-to-r from-cyan-500 to-sky-900 text-white text-center px-4 scroll-mt-[50px]"
         >
           <div className="max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -346,7 +346,7 @@ const App = () => {
       </main>
 
       {/* Socials Section */}
-      <section id="socials" className="bg-white py-16 px-6 text-center">
+      <section id="socials" className="bg-white py-16 px-6 text-center scroll-mt-[50px]">
         <div className="max-w-3xl mx-auto bg-[#e7ebee] rounded-3xl shadow-md p-10">
           <h2 className="text-[28px] md:text-[40px] leading-snug font-bold">
             <span className="text-blue-600">Follow our</span>
@@ -367,7 +367,7 @@ const App = () => {
           <div className="flex justify-center gap-4 mt-8 flex-wrap">
             {/* X (Twitter) */}
             <a
-              href="https://x.com/yourpage"
+              href="https://x.com/PaperX76660"
               target="_blank"
               rel="noreferrer"
               className="group"
@@ -382,7 +382,7 @@ const App = () => {
             </a>
 
             {/* YouTube */}
-            <a
+            {/* <a
               href="https://youtube.com/yourpage"
               target="_blank"
               rel="noreferrer"
@@ -395,7 +395,7 @@ const App = () => {
                   className="w-[28px] h-[28px] transition group-hover:invert"
                 />
               </div>
-            </a>
+            </a> */}
 
             {/* Instagram */}
             <a
@@ -415,7 +415,7 @@ const App = () => {
 
             {/* LinkedIn */}
             <a
-              href="https://linkedin.com/company/yourpage"
+              href="https://linkedin.com/company/papertraderx"
               target="_blank"
               rel="noreferrer"
               className="group"
@@ -435,7 +435,7 @@ const App = () => {
       {/* FAQ Section */}
       <section
         id="faqs"
-        className="bg-gradient-to-r from-cyan-500 to-sky-900 text-gray-800 py-16 px-4 text-center"
+        className="bg-gradient-to-r from-cyan-500 to-sky-900 text-gray-800 py-16 px-4 text-center scroll-mt-[50px]"
       >
         <div className="max-w-6xl mx-auto">
           <h2 className="text-white text-4xl md:text-5xl font-bold mb-6">
@@ -463,7 +463,7 @@ const App = () => {
         </div>
       </section>
 
-      <section id="career" className="py-16 px-6 text-center">
+      <section id="career" className="py-16 px-6 text-center scroll-mt-[50px]">
         <div className="max-w-3xl mx-auto  bg-[#e7ebee] rounded-3xl p-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Join the Team Behind PaperTraderX
@@ -475,7 +475,7 @@ const App = () => {
           </p>
 
           <a
-            href="https://your-career-form-link.com"
+            href="https://forms.gle/qAgxPBoWENLx9xnV8"
             target="_blank"
             rel="noreferrer"
             className="inline-block bg-gradient-to-r from-cyan-500 to-sky-900 text-white px-6 py-3 rounded-lg font-semibold transition transform hover:scale-105"
