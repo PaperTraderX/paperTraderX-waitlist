@@ -367,7 +367,7 @@ const App = () => {
           <div className="flex justify-center gap-4 mt-8 flex-wrap">
             {/* X (Twitter) */}
             <a
-              href="https://x.com/PaperX76660"
+              href="https://x.com/paperTraderX"
               target="_blank"
               rel="noreferrer"
               className="group"
