@@ -87,3 +87,21 @@ function Header() {
 }
 
 export default Header;
+
+// // This is a test comment to trigger deployment
+
+// 7 am to 8.30 am (1.5 hour) (dsa)
+// 8.30 am to 10 am (1.5 hour) (system design)
+
+// 10 am to 11 am (1 hour) (break)
+
+// 11 am to 7 pm (8 hours) (office work)
+
+// 7 pm to 10 pm (3 hours) (break + dinner)
+
+// 10 pm to 1 am (3 hours)
+
+// // 1. dsa
+// // 2. system design
+// // 3. coding/development
+// // 4. office work
