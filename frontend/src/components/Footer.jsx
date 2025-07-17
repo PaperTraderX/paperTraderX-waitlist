@@ -9,7 +9,7 @@ const Footer = () => {
 
         <div className="flex justify-center gap-6 mt-6">
           <a
-            href="https://x.com/PaperX76660"
+            href="https://x.com/paperTraderX"
             target="_blank"
             rel="noopener noreferrer"
             className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-800 hover:bg-black transition"
