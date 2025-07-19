@@ -1,8 +1,7 @@
-import { toast, Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./components/ui/Button";
-import Input from "./components/ui/Input";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Confetti from "react-confetti";
@@ -19,69 +18,21 @@ import {
   DollarSign,
   LineChart,
 } from "lucide-react";
+import WaitlistModal from "./WaitlistModal";
 
 const App = () => {
-  const [email, setEmail] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [referralId, setReferralId] = useState(null);
+  const [referralLink, setReferralLink] = useState("");
   const [width, height] = useWindowSize();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!email) {
-      toast.custom((t) => (
-        <div
-          className={`${
-            t.visible ? "animate-enter" : "animate-leave"
-          } bg-red-500 text-white p-4 rounded-md shadow-lg w-[380px]`}
-        >
-          <strong className="block text-base">Email required</strong>
-          <span className="text-sm">
-            Please enter your email address to join the waitlist.
-          </span>
-        </div>
-      ));
-      return;
-    }
-
-    try {
-      // const res = await fetch("/api/waitlist", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ email }),
-      // });
-      const res = { ok: true };
-
-      if (res.ok) {
-        setIsSubmitted(true);
-        setShowConfetti(true);
-        toast.success(
-          <div>
-            <strong>Welcome to PaperTraderX! 🎉</strong>
-            <p>We'll notify you as soon as PaperTraderX launches.</p>
-          </div>,
-          { icon: "" }
-        );
-        setEmail("");
-        setTimeout(() => setShowConfetti(false), 5000);
-      } else {
-        toast.custom((t) => (
-          <div
-            className={`${
-              t.visible ? "animate-enter" : "animate-leave"
-            } bg-red-500 text-white p-4 rounded-md shadow-lg w-[380px]`}
-          >
-            <strong className="block text-base">Submission Failed</strong>
-            <span className="text-sm">
-              Please try again later. If the issue persists, contact support.
-            </span>
-          </div>
-        ));
-      }
-    } catch (error) {
-      toast.error("Something went wrong. Please try later.");
-    }
-  };
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get("ref");
+    if (ref) setReferralId(ref);
+  }, []);
 
   const features = [
     {
@@ -218,6 +169,17 @@ const App = () => {
   return (
     <>
       <Header />
+      <WaitlistModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        referralId={referralId}
+        onSuccess={(res) => {
+          setIsSubmitted(true);
+          setShowConfetti(true);
+          setReferralLink(res.referralLink);
+        }}
+      />
+
       {showConfetti && <Confetti width={width} height={height} />}
       <Toaster
         position="bottom-right"
@@ -262,31 +224,42 @@ const App = () => {
               virtual money.
             </p>
 
-            {!isSubmitted ? (
-              <form
-                onSubmit={handleSubmit}
-                className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6"
-              >
-                <Input
-                  type="email"
-                  placeholder="Enter your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full sm:w-[300px] font-bold h-12 text-base bg-white/20 border-white/30 text-white placeholder:text-white/100 focus:bg-white/30"
-                />
+            {isSubmitted ? (
+              <div className="bg-white text-green-500 rounded-lg py-4 px-6 font-semibold text-lg shadow text-center space-y-2">
+                <div className="text-2xl font-bold text-green-500">
+                  You're in! 🎉
+                </div>
+                <div className="text-green-500">
+                  We'll notify you as soon as{" "}
+                  <span className="font-bold">PaperTraderX</span> launches.
+                </div>
+                {referralLink && (
+                  <div className="text-black text-base mt-2">
+                    <span className="font-semibold">
+                      Share your referral link and unlock exclusive rewards
+                    </span>
+                    <br />
+                    <a
+                      href={referralLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline text-blue-600 break-words"
+                    >
+                      {referralLink}
+                    </a>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <form className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
                 <Button
-                  type="submit"
+                  onClick={() => setIsModalOpen(true)}
                   className="h-12 px-8 bg-gradient-to-r from-cyan-500 to-sky-900 text-white font-bold transition-all duration-300 hover:scale-105 flex items-center gap-2"
                 >
                   Join Waitlist
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </form>
-            ) : (
-              <div className="bg-white text-green-500 rounded-lg py-4 px-6 font-semibold text-lg mt-6 shadow">
-                You're in! 🎉 <br />
-                We'll notify you as soon as PaperTraderX launches.
-              </div>
             )}
 
             <p className="text-sm text-white mt-4">
@@ -346,7 +319,10 @@ const App = () => {
       </main>
 
       {/* Socials Section */}
-      <section id="socials" className="bg-white py-16 px-6 text-center scroll-mt-[50px]">
+      <section
+        id="socials"
+        className="bg-white py-16 px-6 text-center scroll-mt-[50px]"
+      >
         <div className="max-w-3xl mx-auto bg-[#e7ebee] rounded-3xl shadow-md p-10">
           <h2 className="text-[28px] md:text-[40px] leading-snug font-bold">
             <span className="text-blue-600">Follow our</span>
@@ -497,30 +473,41 @@ const App = () => {
             <p>No risk, all reward.</p>
           </p>
           <div className="max-w-md mx-auto">
-            {!isSubmitted ? (
-              <form
-                onSubmit={handleSubmit}
-                className="flex flex-col sm:flex-row gap-3"
-              >
-                <Input
-                  type="email"
-                  placeholder="Your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full sm:w-[300px] font-bold h-12 text-base bg-white/20 border-white/30 text-white placeholder:text-white/100 focus:bg-white/30"
-                />
+            {isSubmitted ? (
+              <div className="bg-white text-green-500 rounded-lg py-4 px-6 font-semibold text-lg shadow text-center space-y-2">
+                <div className="text-2xl font-bold text-green-500">
+                  You're in! 🎉
+                </div>
+                <div className="text-green-500">
+                  We'll notify you as soon as{" "}
+                  <span className="font-bold">PaperTraderX</span> launches.
+                </div>
+                {referralLink && (
+                  <div className="text-black text-base mt-2">
+                    <span className="font-semibold">
+                      Share your referral link and unlock exclusive rewards
+                    </span>
+                    <br />
+                    <a
+                      href={referralLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline text-blue-600 break-words"
+                    >
+                      {referralLink}
+                    </a>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="flex justify-center">
                 <Button
-                  type="submit"
+                  onClick={() => setIsModalOpen(true)}
                   className="h-12 px-8 bg-gradient-to-r from-cyan-500 to-sky-900 text-white font-bold transition-all duration-300 hover:scale-105 flex items-center gap-2"
                 >
                   Get Early Access
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
-              </form>
-            ) : (
-              <div className="bg-white text-green-500 rounded-lg py-4 px-6 font-semibold text-lg shadow">
-                You're in! 🎉 <br />
-                We'll notify you as soon as PaperTraderX launches.
               </div>
             )}
           </div>

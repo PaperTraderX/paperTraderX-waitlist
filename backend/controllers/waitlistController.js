@@ -56,8 +56,7 @@ export const addToWaitlist = async (req, res) => {
     res.status(201).json({
       message: `Hi ${userName}! You're on the waitlist! Your current position is #${count}`,
       referralId: newUser.referralId,
-      referralLink: `https://paperxtrader.com/?ref=${newUser.referralId}`,
-      referralCount: newUser.referralCount,
+      referralLink: `https://papertraderx-waitlist.netlify.app/?ref=${newUser.referralId}`,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
