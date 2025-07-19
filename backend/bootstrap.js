@@ -7,9 +7,22 @@ import userRoute from "./routes/waitlistRoute.js";
 import internalRoute from "./routes/internalRoute.js";
 import { apiRateLimiter } from "./utils/rateLimiter.js";
 
+const allowedOrigins = process.env.CORS_ORIGIN?.split(",") || [];
+
 function initMiddlewares(app) {
   app.use(helmet());
-  app.use(cors({ origin: process.env.CORS_ORIGIN }));
+  app.use(
+    cors({
+      origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) return callback(null, true);
+        return callback(
+          new Error("CORS policy does not allow access from this origin."),
+          false
+        );
+      },
+    })
+  );
   app.use(express.json());
   app.use("/api", apiRateLimiter);
 }
