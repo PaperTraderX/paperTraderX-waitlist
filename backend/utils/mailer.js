@@ -13,20 +13,25 @@ export const sendEmail = async ({ to, type, userName, referralCount }) => {
   let subject, html;
 
   if (type === "referral") {
-    subject = "🎉 You Got a New Referral!";
+    subject = "🚀 You’ve Earned a New Referral!";
     html = `
-      <p>Hi <strong>${userName}</strong>,</p>
-      <p>Someone just joined the waitlist using your referral link!</p>
-      <p>You've now referred <strong>${referralCount}</strong> people. 🚀</p>
+      <p>Hey <strong>${userName}</strong>! 🙌</p>
+      <p>Someone just signed up using your referral link, nice work! 🥳</p>
+      <p>You’ve now referred <strong>${referralCount}</strong> awesome people. Keep going and climb the leaderboard! 🔥</p>
+      <p>💡 Tip: The more you refer, the sooner you’ll get early access to PaperTraderX.</p>
+      <p>Thanks for spreading the word! 🙏</p>
     `;
   }
 
   if (type === "welcome") {
-    subject = "👋 Welcome to the PaperTraderX Waitlist!";
+    subject = "🎉 Welcome to PaperTraderX – You're In!";
     html = `
-      <p>Hi <strong>${userName}</strong>,</p>
-      <p>Thanks for joining the waitlist. We'll notify you as we roll out access.</p>
-      <p>Stay tuned and don't forget to share your referral link to skip the line!</p>
+      <p>Hi <strong>${userName}</strong> 👋</p>
+      <p>We’re thrilled to have you on the PaperTraderX waitlist!</p>
+      <p>You're officially in line to explore risk-free trading with real market data. 🧠💰</p>
+      <p>🚀 Want to get early access? Share your unique referral link and invite friends—every referral moves you up!</p>
+      <p>We’ll keep you updated. Until then, get ready to level up your trading game. 🎯</p>
+      <p>Cheers,<br>The PaperTraderX Team</p>
     `;
   }
 
