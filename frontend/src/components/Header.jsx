@@ -10,7 +10,7 @@ function Header() {
     { label: "Career", href: "#career" },
   ];
 
-  const [activeSection, setActiveSection] = useState("#hero");
+  const [activeSection, setActiveSection] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
