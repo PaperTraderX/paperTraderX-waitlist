@@ -251,15 +251,16 @@ const App = () => {
                 )}
               </div>
             ) : (
-              <form className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
                 <Button
+                  type="button"
                   onClick={() => setIsModalOpen(true)}
                   className="h-12 px-8 bg-gradient-to-r from-cyan-500 to-sky-900 text-white font-bold transition-all duration-300 hover:scale-105 flex items-center gap-2"
                 >
                   Join Waitlist
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
-              </form>
+              </div>
             )}
 
             <p className="text-sm text-white mt-4">
@@ -513,7 +514,6 @@ const App = () => {
           </div>
         </div>
       </section>
-
       <Footer />
     </>
   );

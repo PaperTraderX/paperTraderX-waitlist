@@ -45,13 +45,28 @@ const WaitlistModal = ({ isOpen, onClose, referralId, onSuccess }) => {
               background: "#EF4444",
               borderRadius: "8px",
               padding: "16px",
-            }
+            },
           }
         );
         onClose();
         return;
       }
-
+      if (res.error === "Invalid username") {
+        toast(
+          <div className="text-white font-bold">
+            Please enter a valid username!
+          </div>,
+          {
+            style: {
+              background: "#EF4444",
+              borderRadius: "8px",
+              padding: "16px",
+            },
+          }
+        );
+        onClose();
+        return;
+      }
       toast.success(
         <div>
           <strong>Welcome to PaperTraderX! 🎉</strong>
