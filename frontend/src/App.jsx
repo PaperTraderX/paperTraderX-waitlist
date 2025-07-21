@@ -204,23 +204,23 @@ const App = () => {
           id="hero"
           className="min-h-[70vh] flex flex-col justify-center items-center px-4 text-center scroll-mt-[100px]"
         >
-          <div className="max-w-3xl w-full space-y-6">
-            <div className="inline-flex items-center justify-center px-4 py-1 rounded-full text-sm bg-green-100 text-green-800 font-medium">
+          <div className="max-w-3xl w-full space-y-4 sm:space-y-6">
+            <div className="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs sm:text-sm bg-green-100 text-green-800 font-medium">
               <TrendingUp className="w-4 h-4 mr-2" />
               Coming Soon - Join the Waitlist
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in">
+            <h1 className="text-3xl sm:text-5xl font-bold text-white mb-4 sm:mb-6 animate-fade-in">
               PaperTraderX
             </h1>
 
-            <h2 className="text-xl md:text-2xl text-white">
+            <h2 className="text-lg sm:text-2xl text-white font-semibold">
               Master the Market Without Risk
             </h2>
 
-            <p className="text-white text-md md:text-lg">
+            <p className="text-white text-sm sm:text-base">
               The ultimate paper trading platform where you can practice trading
-              strategies, learn market dynamics and build confidence – all with
+              strategies, learn market dynamics, and build confidence — all with
               virtual money.
             </p>
 
@@ -251,11 +251,11 @@ const App = () => {
                 )}
               </div>
             ) : (
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mt-4">
                 <Button
                   type="button"
                   onClick={() => setIsModalOpen(true)}
-                  className="h-12 px-8 bg-gradient-to-r from-cyan-500 to-sky-900 text-white font-bold transition-all duration-300 hover:scale-105 flex items-center gap-2"
+                  className="h-10 px-6 text-sm sm:h-12 sm:px-8 bg-gradient-to-r from-cyan-500 to-sky-900 text-white font-bold transition-all duration-300 hover:scale-105 flex items-center gap-2"
                 >
                   Join Waitlist
                   <ArrowRight className="ml-2 w-4 h-4" />
@@ -263,25 +263,25 @@ const App = () => {
               </div>
             )}
 
-            <p className="text-sm text-white mt-4">
-              No spam. Unsubscribe anytime. Be the first to trade risk-free.
+            <p className="text-xs sm:text-sm text-white mt-2 sm:mt-4">
+              No spam. Unsubscribe anytime.
             </p>
           </div>
         </section>
 
         {/* Stats Section */}
-        <section className="py-16 bg-gradient-to-r from-blue-50 to-green-50">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <section className="py-10 sm:py-16 bg-gradient-to-r from-blue-50 to-green-50">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
             {stats.map((s, idx) => (
               <div
                 key={idx}
-                className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition transform hover:scale-105"
+                className="bg-white p-4 sm:p-6 rounded-2xl shadow hover:shadow-lg transition transform hover:scale-105"
               >
-                <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-3 sm:mb-4">
                   {s.icon}
                 </div>
-                <p className="text-3xl md:text-4xl font-bold">{s.value}</p>
-                <p className="text-base text-gray-600">{s.label}</p>
+                <p className="text-2xl sm:text-3xl font-bold">{s.value}</p>
+                <p className="text-xs sm:text-base text-gray-600">{s.label}</p>
               </div>
             ))}
           </div>
@@ -290,29 +290,33 @@ const App = () => {
         {/* Why Choose Section */}
         <section
           id="features"
-          className="py-20 bg-gradient-to-r from-cyan-500 to-sky-900 text-white text-center px-4 scroll-mt-[50px]"
+          className="py-12 sm:py-20 bg-gradient-to-r from-cyan-500 to-sky-900 text-white text-center px-4 scroll-mt-[50px]"
         >
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-3xl sm:text-5xl font-bold mb-4">
               Why Choose PaperTraderX?
             </h2>
-            <p className="text-white/80 text-base md:text-lg max-w-2xl mx-auto mb-12">
-              Everything you need to become a confident trader<br></br>without
-              risking your hard earned money.
+            <p className="text-white/80 text-sm sm:text-lg mb-8 sm:mb-12">
+              Everything you need to become a confident trader
+              <br /> without risking your hard-earned money.
             </p>
           </div>
 
-          <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
             {features.map((f, idx) => (
               <div
                 key={idx}
-                className="bg-white/10 p-6 rounded-2xl shadow hover:shadow-lg transition transform hover:scale-105 text-left backdrop-blur-sm"
+                className="bg-white/10 p-4 sm:p-6 rounded-2xl shadow hover:shadow-lg transition transform hover:scale-105 text-left backdrop-blur-sm"
               >
-                <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mb-4">
-                  <f.icon className="w-6 h-6 text-white" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/20 flex items-center justify-center mb-3">
+                  <f.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{f.title}</h3>
-                <p className="text-white/80 text-sm">{f.description}</p>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">
+                  {f.title}
+                </h3>
+                <p className="text-white/80 text-xs sm:text-sm">
+                  {f.description}
+                </p>
               </div>
             ))}
           </div>
@@ -322,10 +326,10 @@ const App = () => {
       {/* Socials Section */}
       <section
         id="socials"
-        className="bg-white py-16 px-6 text-center scroll-mt-[50px]"
+        className="bg-white py-10 sm:py-16 px-4 sm:px-6 text-center scroll-mt-[50px]"
       >
-        <div className="max-w-3xl mx-auto bg-[#e7ebee] rounded-3xl shadow-md p-10">
-          <h2 className="text-[28px] md:text-[40px] leading-snug font-bold">
+        <div className="max-w-3xl mx-auto bg-[#e7ebee] rounded-3xl shadow-md p-6 sm:p-10">
+          <h2 className="text-2xl sm:text-4xl font-bold leading-snug">
             <span className="text-blue-600">Follow our</span>
             <br />
             <span className="text-black font-extrabold">
@@ -333,16 +337,14 @@ const App = () => {
             </span>
           </h2>
 
-          <p className="text-gray-700 text-[20px] mt-4 leading-relaxed">
-            Follow PaperTraderX on social media for fun trading insights,
-            confidence building
-            <br />
-            and the latest updates.
+          <p className="text-gray-700 text-sm sm:text-lg mt-3 sm:mt-4">
+            Follow PaperTraderX on social media for fun insights
+            <br /> and the latest updates.
           </p>
           <p>Let’s learn, grow and conquer the markets together!</p>
 
-          <div className="flex justify-center gap-4 mt-8 flex-wrap">
-            {/* X (Twitter) */}
+          <div className="flex justify-center gap-3 sm:gap-4 mt-6 sm:mt-8 flex-wrap">
+                        {/* X (Twitter) */}
             <a
               href="https://x.com/paperTraderX"
               target="_blank"
@@ -412,27 +414,29 @@ const App = () => {
       {/* FAQ Section */}
       <section
         id="faqs"
-        className="bg-gradient-to-r from-cyan-500 to-sky-900 text-gray-800 py-16 px-4 text-center scroll-mt-[50px]"
+        className="bg-gradient-to-r from-cyan-500 to-sky-900 text-gray-800 py-10 sm:py-16 px-4 text-center scroll-mt-[50px]"
       >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-white text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-white text-3xl sm:text-5xl font-bold mb-4 sm:mb-6">
             Frequently Asked Questions
           </h2>
-          <p className="text-gray-700 font-bold text-lg mb-12">
+          <p className="text-gray-700 font-bold text-sm sm:text-lg mb-6 sm:mb-12">
             Got questions? We've got answers!
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {faqData.map((faq, index) => (
               <div
                 key={index}
-                className="bg-blue-100 font-bold rounded-3xl shadow-md hover:shadow-lg p-6 transition transform hover:scale-105 cursor-pointer"
+                className="bg-blue-100 font-bold rounded-3xl shadow-md hover:shadow-lg p-4 sm:p-6 transition transform hover:scale-105 cursor-pointer"
                 onClick={() => toggleFAQ(index)}
               >
                 {openFAQ === index ? (
-                  <p className="text-sm text-gray-600">{faq.answer}</p>
+                  <p className="text-xs sm:text-sm text-gray-600">
+                    {faq.answer}
+                  </p>
                 ) : (
-                  <p>{faq.question}</p>
+                  <p className="text-xs sm:text-base">{faq.question}</p>
                 )}
               </div>
             ))}
@@ -463,19 +467,21 @@ const App = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-cyan-500 to-sky-900 text-gray-800 py-20">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-white mb-6">
+      <section className="bg-gradient-to-r from-cyan-500 to-sky-900 text-gray-800 py-10 sm:py-20">
+        <div className="max-w-4xl mx-auto text-center px-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-6">
             Ready to Start Your Trading Journey?
           </h2>
-          <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
-            Join thousands of future traders who are preparing to master the
-            markets with PaperTraderX.
-            <p>No risk, all reward.</p>
+          <p className="text-base sm:text-xl text-white mb-6 sm:mb-8">
+            Join thousands of future traders mastering the markets with
+            PaperTraderX.
+            <br />
+            <span>No risk, all reward.</span>
           </p>
+
           <div className="max-w-md mx-auto">
             {isSubmitted ? (
-              <div className="bg-white text-green-500 rounded-lg py-4 px-6 font-semibold text-lg shadow text-center space-y-2">
+                            <div className="bg-white text-green-500 rounded-lg py-4 px-6 font-semibold text-lg shadow text-center space-y-2">
                 <div className="text-2xl font-bold text-green-500">
                   You're in! 🎉
                 </div>
@@ -504,7 +510,7 @@ const App = () => {
               <div className="flex justify-center">
                 <Button
                   onClick={() => setIsModalOpen(true)}
-                  className="h-12 px-8 bg-gradient-to-r from-cyan-500 to-sky-900 text-white font-bold transition-all duration-300 hover:scale-105 flex items-center gap-2"
+                  className="h-10 px-6 text-sm sm:h-12 sm:px-8 bg-gradient-to-r from-cyan-500 to-sky-900 text-white font-bold transition-all duration-300 hover:scale-105 flex items-center gap-2"
                 >
                   Get Early Access
                   <ArrowRight className="ml-2 w-4 h-4" />
