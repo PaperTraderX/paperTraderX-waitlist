@@ -30,10 +30,22 @@ function Header() {
     return () => observer.disconnect();
   }, []);
 
+  const scrollToHero = () => {
+    const heroSection = document.getElementById("hero");
+    if (heroSection) {
+      heroSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <header className="shadow bg-gray-900 fixed top-0 left-0 w-full z-50">
       <div className="flex justify-between items-center py-3 px-6 max-w-screen-xl mx-auto w-full">
-        <div className="text-white font-bold text-xl">PaperTraderX</div>
+        <div
+          className="text-white font-bold text-xl cursor-pointer"
+          onClick={scrollToHero}
+        >
+          PaperTraderX
+        </div>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-4 ml-auto">
